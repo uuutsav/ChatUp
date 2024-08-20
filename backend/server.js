@@ -2,9 +2,11 @@ const express = require("express")
 const dotenv = require("dotenv");
 const chats = require("./dummy/data");
 const cors = require('cors');
+const connectDB = require("./config/db");
 
 const app = express();
 dotenv.config();
+connectDB();
 const port = process.env.PORT || 3000;
 app.use(cors({
     origin: 'http://localhost:5173'
