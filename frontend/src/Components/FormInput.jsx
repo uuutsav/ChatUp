@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const FormInput = ({label, placeholder, type}) => {
+const FormInput = ({ label, placeholder, type, setState, onChangeHandler}) => {
 
     return (
         <div className="mt-4">
@@ -11,6 +11,10 @@ const FormInput = ({label, placeholder, type}) => {
                 className="text-gray-700 border border-gray-300 rounded py-2 px-4 block w-full focus:outline-2 focus:outline-blue-700"
                 type={type}
                 required
+                onChange={(e) => {
+                    setState(type == "file" ? e.target.files[0] : e.target.value);
+                    onChangeHandler(e.target.files[0]);
+                }}
             />
         </div>
     );
