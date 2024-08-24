@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 const chats = require("./dummy/data");
 const cors = require('cors');
 const connectDB = require("./config/db");
-const userRoutes = require("./routes/userRoutes")
+const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middlewares/errorHandlerMiddleware");
 
 const app = express();
 dotenv.config();
@@ -21,6 +22,10 @@ app.get('/', (req, resp) => {
 })
 
 app.use('/api/user', userRoutes)
+
+// error handling middlewares
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(port, () => {
     console.log("server started at port: ", port)
