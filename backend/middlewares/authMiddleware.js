@@ -3,7 +3,7 @@ const User = require("../db/userModel")
 const asyncHandler = require("express-async-handler")
 
 const authMiddleware = asyncHandler(async (req, resp, next) => {
-    const auth = req.header.authorization;
+    const auth = req.headers.authorization;
     if (auth && auth.startsWith("Bearer")) {
         try {
             const token = auth.split(" ")[1];
@@ -16,6 +16,10 @@ const authMiddleware = asyncHandler(async (req, resp, next) => {
             resp.status(401);
             throw new Error("Not authorized, token failed");
         }
+    }
+    else {
+        resp.status(401);
+        throw new Error("No token found in header");
     }
 })
 
