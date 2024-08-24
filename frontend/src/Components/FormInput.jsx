@@ -13,7 +13,7 @@ const FormInput = ({ label, placeholder, type, setState, onChangeHandler}) => {
                 required
                 onChange={(e) => {
                     setState(type == "file" ? e.target.files[0] : e.target.value);
-                    onChangeHandler(e.target.files[0]);
+                    type == "file" ? onChangeHandler(e.target.files[0]) : null;
                 }}
             />
         </div>
